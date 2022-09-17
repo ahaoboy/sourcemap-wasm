@@ -1,0 +1,17 @@
+*.log
+node_modules
+.DS_Store
+.idea
+report.*.json
+
+*.o
+build
+dist
+*-lock.json
+.vscode
+target
+*.node
+bench.txt
+
+parcel_sourcemap_wasm/dist-*
+target
