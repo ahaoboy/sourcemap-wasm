@@ -1,14 +1,14 @@
 /**
  * A position for a source mapping. 1-indexed.
  */
- export type MappingPosition = {
+export type MappingPosition = {
   line: number;
   column: number;
 };
 
 /**
-* An indexed source mapping block
-*/
+ * An indexed source mapping block
+ */
 export type IndexedMapping<T> = {
   generated: MappingPosition;
   original?: MappingPosition;
@@ -17,8 +17,8 @@ export type IndexedMapping<T> = {
 };
 
 /**
-* A source map in VLQ format
-*/
+ * A source map in VLQ format
+ */
 export type VLQMap = Readonly<{
   sources: ReadonlyArray<string>;
   sourcesContent?: ReadonlyArray<string | null>;
@@ -30,8 +30,8 @@ export type VLQMap = Readonly<{
 }>;
 
 /**
-* A parsed source map
-*/
+ * A parsed source map
+ */
 export type ParsedMap = {
   sources: string[];
   names: string[];
@@ -40,17 +40,17 @@ export type ParsedMap = {
 };
 
 /**
-* Options for stringifying a source map
-*/
+ * Options for stringifying a source map
+ */
 export type SourceMapStringifyOptions = {
   file?: string;
   sourceRoot?: string;
   rootDir?: string;
   inlineSources?: boolean;
   fs?: {
-      readFile(path: string, encoding: string): Promise<string>;
+    readFile(path: string, encoding: string): Promise<string>;
   };
-  format?: 'inline' | 'string' | 'object';
+  format?: "inline" | "string" | "object";
 };
 
 /**
@@ -64,16 +64,28 @@ export type GenerateEmptyMapOptions = {
 };
 
 /**
-* A source map to assist in debugging during development
-*/
+ * A source map to assist in debugging during development
+ */
 export default interface SourceMap {
   // constructor(projectRoot?: string, buffer?: Buffer);
   generateEmptyMap(opts: GenerateEmptyMapOptions): SourceMap;
-  addEmptyMap(sourceName: string, sourceContent: string, lineOffset?: number): SourceMap;
+  addEmptyMap(
+    sourceName: string,
+    sourceContent: string,
+    lineOffset?: number
+  ): SourceMap;
   addVLQMap(map: VLQMap, lineOffset?: number, columnOffset?: number): SourceMap;
   addBuffer(buffer: Buffer, lineOffset?: number): SourceMap;
-  addIndexedMapping(mapping: IndexedMapping<string>, lineOffset?: number, columnOffset?: number): void;
-  addIndexedMappings(mappings: Array<IndexedMapping<string>>, lineOffset?: number, columnOffset?: number): void;
+  addIndexedMapping(
+    mapping: IndexedMapping<string>,
+    lineOffset?: number,
+    columnOffset?: number
+  ): void;
+  addIndexedMappings(
+    mappings: Array<IndexedMapping<string>>,
+    lineOffset?: number,
+    columnOffset?: number
+  ): void;
   addName(name: string): number;
   addNames(names: string[]): number[];
   addSource(source: string): number;
@@ -86,9 +98,19 @@ export default interface SourceMap {
   getName(index: number): string;
   extends(buffer: Buffer): SourceMap;
   getMap(): ParsedMap;
-  findClosestMapping(line: number, column: number): IndexedMapping<string> | undefined;
-  offsetLines(line: number, lineOffset: number): IndexedMapping<string> | undefined;
-  offsetColumns(line: number, column: number, columnOffset: number): IndexedMapping<string> | undefined;
+  findClosestMapping(
+    line: number,
+    column: number
+  ): IndexedMapping<string> | undefined;
+  offsetLines(
+    line: number,
+    lineOffset: number
+  ): IndexedMapping<string> | undefined;
+  offsetColumns(
+    line: number,
+    column: number,
+    columnOffset: number
+  ): IndexedMapping<string> | undefined;
   toBuffer(): Buffer;
   toVLQ(): VLQMap;
   delete(): void;
@@ -96,6 +118,6 @@ export default interface SourceMap {
 }
 
 /**
-* Only used by the wasm version, await this to ensure the wasm binary is loaded
-*/
+ * Only used by the wasm version, await this to ensure the wasm binary is loaded
+ */
 // export const init: Promise<void>

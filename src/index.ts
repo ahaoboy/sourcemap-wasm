@@ -1,4 +1,4 @@
-import { init } from "./sourcemap-wasm";
+import init from "./sourcemap-wasm";
 import SourceMap from "./wasm";
 export * from "./types";
-export { init, SourceMap };
+export { SourceMap, init };

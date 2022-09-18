@@ -7,7 +7,7 @@ import type {
   GenerateEmptyMapOptions,
 } from "./types";
 import SourceMap from "./SourceMap";
-import * as bindings from "./wasm-bindings-web";
+import * as bindings from "./sourcemap-wasm";
 
 export default class WasmSourceMap extends SourceMap {
   constructor(projectRoot: string = "/", buffer?: Buffer) {
