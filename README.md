@@ -3,7 +3,7 @@ fork https://github.com/parcel-bundler/source-map
 import { init, SourceMap } from "sourcemap-wasm";
 
 await init();
-// or await init('https://unpkg.com/browse/sourcemap-wasm@0.1.3/parcel_sourcemap_wasm/pkg/parcel_sourcemap_wasm_bg.wasm')
+// or await init('https://unpkg.com/sourcemap-wasm@0.1.3/parcel_sourcemap_wasm/pkg/parcel_sourcemap_wasm_bg.wasm')
 
 let map = new SourceMap("/test-root");
 map.addVLQMap({
