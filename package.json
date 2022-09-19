@@ -1,6 +1,6 @@
 {
   "name": "sourcemap-wasm",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -10,8 +10,12 @@
     "dist",
     "parcel_sourcemap_wasm/pkg/*.wasm"
   ],
+  "prettier":{
+    "singleQuote": false
+  },
   "scripts": {
-    "build": "npm run build:cjs && npm run build:esm",
+    "build": "fse remove dist && npm run build:cjs && npm run build:esm && npm run copy:wasm",
+    "copy:wasm":"fse copy ./src/sourcemap-wasm ./dist/cjs/sourcemap-wasm && fse copy ./src/sourcemap-wasm ./dist/esm/sourcemap-wasm",
     "build:cjs": "tsc --module commonjs --outDir ./dist/cjs",
     "build:esm": "tsc",
     "build:rust": "wasm-pack build parcel_sourcemap_wasm --target web",
@@ -24,10 +28,10 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^4.8.3",
+    "@atao60/fse-cli": "^0.1.7",
     "@types/node": "^18.7.18",
-    "single-wasm": "*"
+    "single-wasm": "*",
+    "typescript": "^4.8.3"
   }
 }
